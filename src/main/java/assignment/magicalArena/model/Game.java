@@ -1,7 +1,6 @@
 package assignment.magicalArena.model;
 
 import assignment.magicalArena.model.types.GameState;
-import assignment.magicalArena.model.types.PlayerType;
 import assignment.magicalArena.winStrategy.GameWinningStrategy;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class Game {
         this.nextPlayerIndex = 0;
     }
 
-    public Player getWinnerPlayer(Game game) {
+    public Player getWinnerPlayer() {
         return winner;
     }
 
@@ -45,7 +44,9 @@ public class Game {
 
 
     public void printPlayers() {
-
+        for(int i = 0; i < players.size(); i++){
+            players.get(i).printPlayer();
+        }
     }
 
 
@@ -73,26 +74,12 @@ public class Game {
         }
 
         private void validate() throws Exception {
-            if(players.size() < 1 || players.size() > 2){
+            if(players.size() != 2){
                 throw new Exception();
             }
-            validateNumberOfBots();
         }
 
-        private void validateNumberOfBots() throws Exception {
-            int botCount = 0;
-            for(int i=0;i<players.size();i++){
-                if(players.get(i).getType().equals(PlayerType.BOT)){
-                    botCount++;
-                }
-            }
 
-            // ALL the BOTs cannot play the GAME.
-            if(botCount == players.size()) {
-                throw new Exception();
-            }
-
-        }
 
     }
 }

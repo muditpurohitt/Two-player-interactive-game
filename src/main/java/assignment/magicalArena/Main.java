@@ -30,5 +30,6 @@ public class Main {
             gameController.printPlayers(game);
             gameController.makeMove(game);
         }
+        System.out.println("GAME ENDED and USER" + gameController.getWinner(game).getName()+ " won the game...");
     }
 }

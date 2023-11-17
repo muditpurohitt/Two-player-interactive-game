@@ -15,11 +15,11 @@ public class GameController {
         return Game.getBuilder().setPlayers(players).setStrategy(gameWinningStrategy).build();
     }
     public void printPlayers(Game game){
-
+        game.printPlayers();
     }
 
     public Player getWinner(Game game){
-        return null;
+        return game.getWinnerPlayer();
     }
 
     public void makeMove(Game game){
@@ -27,7 +27,7 @@ public class GameController {
     }
 
     public GameState checkState(Game game){
-        return null;
+        return game.getGameState();
     }
 }
 
