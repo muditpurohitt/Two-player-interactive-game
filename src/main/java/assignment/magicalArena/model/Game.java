@@ -34,6 +34,10 @@ public class Game {
         return nextPlayerIndex;
     }
 
+    public void makeMove(){
+
+    }
+
     public static Builder getBuilder(){
         return new Builder();
     }

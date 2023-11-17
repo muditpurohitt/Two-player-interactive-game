@@ -3,12 +3,21 @@ package assignment.magicalArena;
 
 import assignment.magicalArena.controller.GameController;
 import assignment.magicalArena.model.Game;
+import assignment.magicalArena.model.Player;
 import assignment.magicalArena.model.types.GameState;
+import assignment.magicalArena.winStrategy.CheckHeathWinningStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         GameController gameController = new GameController();
-        Game game = gameController.startGame();
+        List<Player> players = new ArrayList<>();
+        players.add(new Player());
+        players.add(new Player());
+
+        Game game = gameController.startGame(players, new CheckHeathWinningStrategy());
         //in case there are multiple games running, we need to specify which game we are talking about to
         // the GameController
         while(gameController.checkState(game).equals(GameState.IN_PROGRESS)){
