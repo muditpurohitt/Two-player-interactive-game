@@ -9,16 +9,24 @@ import java.util.List;
 public class Game {
     private List<Player> players;
     private GameState gameState;
-    private Integer nextPlayerIndex;
+    private Player attacker;
+    private Player defender;
     private Player winner;
-
     private GameWinningStrategy gameWinningStrategy;
 
     private Game(List<Player> players, GameWinningStrategy gameWinningStrategy){
         this.players = players;
         this.gameWinningStrategy = gameWinningStrategy;
         this.gameState = GameState.IN_PROGRESS;
-        this.nextPlayerIndex = 0;
+
+        if(players.get(0).getHealth() > players.get(0).getHealth()){
+            this.attacker = players.get(1);
+            this.defender = players.get(0);
+        }
+        else{
+            this.attacker = players.get(0);
+            this.defender = players.get(1);
+        }
     }
 
     public Player getWinnerPlayer() {
@@ -29,18 +37,46 @@ public class Game {
         return gameState;
     }
 
-    public Integer getNextPlayerIndex() {
-        return nextPlayerIndex;
+    public Integer getAttackerIndex() {
+        return attacker.getIndex();
+    }
+
+    public Integer getDefenderIndex() {
+        return defender.getIndex();
     }
 
     public void makeMove(){
+        /*
+          1. get the attacker
+          2. get the defender
+          3. define attack value
+          4. define defend value
+          5. update reduced health
+        */
 
+        System.out.println("Attacker : " + attacker.getName());
+        System.out.println("Defender : " + defender.getName());
+
+        int attackValue = attacker.rollDice()*attacker.getAttack();
+        int defendValue = defender.rollDice()*defender.getStrength();
+        defender.setHealth(attackValue - defendValue);
+
+        if(gameWinningStrategy.checkWinner(defender)){
+            gameState = GameState.END;
+            winner = defender;
+        }
+        else{
+            Player temp = defender;
+            defender = attacker;
+            attacker = temp;
+        }
     }
+
+
 
     public static Builder getBuilder(){
         return new Builder();
     }
-
 
 
     public void printPlayers() {
@@ -78,8 +114,5 @@ public class Game {
                 throw new Exception();
             }
         }
-
-
-
     }
 }

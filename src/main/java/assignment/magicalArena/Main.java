@@ -14,8 +14,8 @@ public class Main {
     public static void main(String[] args) {
         GameController gameController = new GameController();
         List<Player> players = new ArrayList<>();
-        players.add(new Player());
-        players.add(new Player());
+        players.add(new Player("a", 0, 10, 20, 30));
+        players.add(new Player("b", 1, 20, 30, 40));
 
         Game game = gameController.startGame(players, new CheckHeathWinningStrategy());
         //in case there are multiple games running, we need to specify which game we are talking about to
