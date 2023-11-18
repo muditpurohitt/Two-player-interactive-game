@@ -1,4 +1,4 @@
-package assignment.magicalArena.winStrategy;
+package assignment.magicalArena.service.winStrategy;
 
 import assignment.magicalArena.model.Player;
 

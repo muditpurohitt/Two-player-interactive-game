@@ -1,6 +1,10 @@
 package assignment.magicalArena.model;
 
+import assignment.magicalArena.service.DiceService;
+import assignment.magicalArena.service.PrintPlayersService;
+
 import java.util.Random;
+import java.util.Scanner;
 
 public class Player {
     private String name;
@@ -8,9 +12,6 @@ public class Player {
     private Integer strength;
     private Integer attack;
     private Integer health;
-
-    // move? should move be included as a class....
-    // attributes - list of players, final health of defender after the move
 
     public Player(String name, Integer index, Integer strength, Integer attack, Integer health){
         this.name = name;
@@ -23,27 +24,8 @@ public class Player {
     public String getName(){return name;}
     public Integer getIndex(){return index;}
     public Integer getHealth(){return health;}
-
-    public void setHealth(Integer value){
-        this.health = value;
-    }
-
+    public void setHealth(Integer value){this.health = value;}
     public Integer getStrength(){return strength;}
     public Integer getAttack(){return attack;}
-
-    public void printPlayer(){
-        System.out.println("Name : " + name + "  Attack: " + attack + "  Strength: " + strength + "  Health: " + health);
-    }
-
-    public Integer rollDice() {
-        // Create a Random object
-        Random random = new Random();
-
-        // Generate a random number between 1 and 6 (inclusive)
-        int min = 1;
-        int max = 6;
-        int randomNumber = random.nextInt(max - min + 1) + min;
-
-        return randomNumber;
-    }
+    public Integer rollDice() {return new DiceService(this).roll();}
 }

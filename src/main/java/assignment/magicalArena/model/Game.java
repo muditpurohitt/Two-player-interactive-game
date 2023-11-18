@@ -1,12 +1,17 @@
 package assignment.magicalArena.model;
 
 import assignment.magicalArena.model.types.GameState;
-import assignment.magicalArena.winStrategy.GameWinningStrategy;
+import assignment.magicalArena.service.GameStatusUpdatingService;
+import assignment.magicalArena.service.MakeMoveService;
+import assignment.magicalArena.service.MakeMoveService;
+import assignment.magicalArena.service.PrintPlayersService;
+import assignment.magicalArena.service.winStrategy.GameWinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
+    //ATTRIBUTES
     private List<Player> players;
     private GameState gameState;
     private Player attacker;
@@ -14,6 +19,7 @@ public class Game {
     private Player winner;
     private GameWinningStrategy gameWinningStrategy;
 
+    //CONSTRUCTOR
     private Game(List<Player> players, GameWinningStrategy gameWinningStrategy){
         this.players = players;
         this.gameWinningStrategy = gameWinningStrategy;
@@ -29,86 +35,67 @@ public class Game {
         }
     }
 
+
+
+    //METHODS
     public Player getWinnerPlayer() {
         return winner;
     }
-
+    public void setWinner(Player player){
+        winner = player;
+    }
+    public Player getAttacker() {
+        return attacker;
+    }
+    public void setAttacker(Player player){ attacker = player;}
+    public Player getDefender() {
+        return defender;
+    }
+    public void setDefender(Player player){ defender = player;}
     public GameState getGameState() {
         return gameState;
     }
-
-    public Integer getAttackerIndex() {
-        return attacker.getIndex();
-    }
-
-    public Integer getDefenderIndex() {
-        return defender.getIndex();
-    }
-
-    public void makeMove(){
-        /*
-          1. get the attacker
-          2. get the defender
-          3. define attack value
-          4. define defend value
-          5. update reduced health
-        */
-
-        System.out.println("Attacker : " + attacker.getName());
-        System.out.println("Defender : " + defender.getName());
-
-        int attackValue = attacker.rollDice()*attacker.getAttack();
-        int defendValue = defender.rollDice()*defender.getStrength();
-        defender.setHealth(attackValue - defendValue);
-
-        if(gameWinningStrategy.checkWinner(defender)){
-            gameState = GameState.END;
-            winner = defender;
-        }
-        else{
-            Player temp = defender;
-            defender = attacker;
-            attacker = temp;
-        }
-    }
-
-
-
+    public void setGameState(GameState state) { gameState = state; }
+    public GameWinningStrategy getGameWinningStrategy() {return gameWinningStrategy;}
     public static Builder getBuilder(){
         return new Builder();
     }
+    public void printPlayers() {new PrintPlayersService(players).print();}
+    public void makeMove(){
+        System.out.println("Attacker : " + attacker.getName());
+        System.out.println("Defender : " + defender.getName());
 
+        Integer damage = new MakeMoveService(this).play();
 
-    public void printPlayers() {
-        for(int i = 0; i < players.size(); i++){
-            players.get(i).printPlayer();
-        }
+        System.out.println(defender.getName() + " incurred a damage of " + damage);
+
+        new GameStatusUpdatingService(this).update();
     }
 
 
+
+
+    //BUILDER
     public static class Builder{
         private List<Player> players;
         private GameWinningStrategy gameWinningStrategy;
-
         private Builder(){
             this.players = new ArrayList<>();
         }
+
 
         public Builder setPlayers(List<Player> players){
             this.players = players;
             return this;
         }
-
         public Builder setStrategy(GameWinningStrategy gameWinningStrategy){
             this.gameWinningStrategy = gameWinningStrategy;
             return this;
         }
-
         public Game build() throws Exception {
             validate();
             return new Game(players,gameWinningStrategy);
         }
-
         private void validate() throws Exception {
             if(players.size() != 2){
                 throw new Exception();
