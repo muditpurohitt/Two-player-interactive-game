@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserInput {
+public class InputService {
     private List<Player> players;
 
-    public UserInput(){
+    public InputService(){
         players = new ArrayList<>();
     }
 
@@ -28,6 +28,7 @@ public class UserInput {
             }
             catch (Exception e) {
                 System.out.println("Please enter a valid name");
+                name = scn.nextLine();
             }
 
             System.out.print(" Max Attack: ");
@@ -36,6 +37,7 @@ public class UserInput {
             }
             catch (Exception e){
                 System.out.println("Please enter a valid number less than 100000000");
+                attack = scn.nextInt();
             }
 
             System.out.print(" Max Strength: ");
@@ -44,6 +46,7 @@ public class UserInput {
             }
             catch (Exception e){
                 System.out.println("Please enter a valid number less than 100000000");
+                strength = scn.nextInt();
             }
 
             System.out.print(" Max health: ");
@@ -52,6 +55,7 @@ public class UserInput {
             }
             catch (Exception e){
                 System.out.println("Please enter a valid number less than 100000000");
+                health = scn.nextInt();
             }
             System.out.println();
 
