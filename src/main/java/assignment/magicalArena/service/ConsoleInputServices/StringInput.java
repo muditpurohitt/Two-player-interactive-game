@@ -1,4 +1,4 @@
-package assignment.magicalArena.service.InputServices;
+package assignment.magicalArena.service.ConsoleInputServices;
 
 import java.util.Scanner;
 

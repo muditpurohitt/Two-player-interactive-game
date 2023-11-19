@@ -1,11 +1,10 @@
-package assignment.magicalArena.service.InputServices;
+package assignment.magicalArena.service.ConsoleInputServices;
 
 import java.util.Scanner;
 
 public class IntegerInput {
     private Integer returnValue;
     private Scanner scn;
-
     public IntegerInput(Integer returnValue) {
         this.returnValue = returnValue;
         scn = new Scanner(System.in);
@@ -18,13 +17,13 @@ public class IntegerInput {
 
             if (userInput >= 16000000) {
                 System.out.println("Please enter a number less than 16000000.");
-                return takeInput(); // Return the result of the recursive call
+                return takeInput();
             } else {
                 returnValue = userInput;
             }
         } catch (Exception e) {
-            scn.nextLine(); // Consume the invalid input
-            return takeInput(); // Return the result of the recursive call
+            scn.nextLine();
+            return takeInput();
         }
 
         return returnValue;

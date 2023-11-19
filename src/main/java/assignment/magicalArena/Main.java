@@ -6,22 +6,34 @@ import assignment.magicalArena.model.Game;
 import assignment.magicalArena.model.types.GameState;
 import assignment.magicalArena.service.winStrategy.CheckHeathWinningStrategy;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         GameController gameController = new GameController();
         Game game = null;
 
+
         try{game = gameController.startGame(gameController.getInput(), new CheckHeathWinningStrategy());}
         catch (Exception e){
             System.out.println("Please enter 2 players");
         }
-
+        Scanner scn = new Scanner(System.in);
         while(gameController.checkState(game).equals(GameState.IN_PROGRESS)){
             gameController.printPlayers(game);
             gameController.makeMove(game);
+
+            //functionality to quit anytime q is pressed
+            System.out.print("Enter 'q' anytime, to exit: ");
+            String userInput = scn.nextLine();
+            if ("q".equalsIgnoreCase(userInput)) {
+                System.out.println("Exiting the game...");
+                break;
+            }
         }
 
-        System.out.println(gameController.getWinner(game).getName()+ " won the game...");
+        try{System.out.println(gameController.getWinner(game).getName()+ " won the game...");}
+        catch (Exception e){System.out.println("Game exited in between");}
     }
 
 }

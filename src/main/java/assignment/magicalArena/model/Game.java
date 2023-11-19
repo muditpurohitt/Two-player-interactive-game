@@ -67,7 +67,7 @@ public class Game {
 
         Integer damage = new MakeMoveService(this).play();
 
-        System.out.println(defender.getName() + " incurred a damage of " + damage);
+        System.out.println(defender.getName() + " incurred a damage of " + damage + " now has health: " + defender.getHealth());
 
         new GameStatusUpdatingService(this).update();
     }

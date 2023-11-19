@@ -1,12 +1,11 @@
-package assignment.magicalArena.service.InputServices;
+package assignment.magicalArena.service.ConsoleInputServices;
 
 import assignment.magicalArena.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class InputService {
+public class  InputService {
     private List<Player> players;
 
     public InputService(){

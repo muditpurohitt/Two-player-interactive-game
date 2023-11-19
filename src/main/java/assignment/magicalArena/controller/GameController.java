@@ -3,7 +3,7 @@ package assignment.magicalArena.controller;
 import assignment.magicalArena.model.Game;
 import assignment.magicalArena.model.Player;
 import assignment.magicalArena.model.types.GameState;
-import assignment.magicalArena.service.InputServices.InputService;
+import assignment.magicalArena.service.ConsoleInputServices.InputService;
 import assignment.magicalArena.service.winStrategy.GameWinningStrategy;
 
 import java.util.List;
