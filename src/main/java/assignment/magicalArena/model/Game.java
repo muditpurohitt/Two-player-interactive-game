@@ -1,14 +1,14 @@
 package assignment.magicalArena.model;
 
 import assignment.magicalArena.model.types.GameState;
-import assignment.magicalArena.service.GameStatusUpdatingService;
+import assignment.magicalArena.service.*;
+import assignment.magicalArena.service.DiceRollStrategy.DiceRollStrategy;
 import assignment.magicalArena.service.MakeMoveService;
-import assignment.magicalArena.service.MakeMoveService;
-import assignment.magicalArena.service.PrintPlayersService;
 import assignment.magicalArena.service.winStrategy.GameWinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Game {
     //ATTRIBUTES
@@ -92,14 +92,8 @@ public class Game {
             this.gameWinningStrategy = gameWinningStrategy;
             return this;
         }
-        public Game build() throws Exception {
-            validate();
+        public Game build(){
             return new Game(players,gameWinningStrategy);
-        }
-        private void validate() throws Exception {
-            if(players.size() != 2){
-                throw new Exception();
-            }
         }
     }
 }

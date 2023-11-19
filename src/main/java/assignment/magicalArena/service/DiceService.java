@@ -1,30 +1,24 @@
 package assignment.magicalArena.service;
 
 import assignment.magicalArena.model.Player;
+import assignment.magicalArena.service.DiceRollStrategy.DiceRollStrategy;
 
 import java.util.Random;
 import java.util.Scanner;
 
 public class DiceService {
     private Player player;
+    DiceRollStrategy diceRollStrategy;
     Scanner scn;
 
-    public DiceService(Player player){
+    public DiceService(Player player, DiceRollStrategy diceRollStrategy){
         this.player = player;
+        this.diceRollStrategy = diceRollStrategy;
         scn = new Scanner(System.in);
     }
     public Integer roll(){
         System.out.println(player.getName() +" please press enter to roll the dice");
         scn.nextLine();
-        Random random = new Random();
-
-        // Generate a random number between 1 and 6 (inclusive)
-        int min = 1;
-        int max = 6;
-        int randomNumber = random.nextInt(max - min + 1) + min;
-
-        System.out.println(
-                "You got " + randomNumber + " on the dice");
-        return randomNumber;
+        return diceRollStrategy.roll();
     }
 }

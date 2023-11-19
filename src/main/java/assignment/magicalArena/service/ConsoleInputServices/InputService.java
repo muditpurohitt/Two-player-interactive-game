@@ -1,15 +1,20 @@
 package assignment.magicalArena.service.ConsoleInputServices;
 
 import assignment.magicalArena.model.Player;
+import assignment.magicalArena.service.DiceRollStrategy.DiceRollStrategy;
+import assignment.magicalArena.service.DiceRollStrategy.RollRandom;
+import assignment.magicalArena.service.DiceService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class  InputService {
     private List<Player> players;
+    DiceRollStrategy diceRollStrategy;
 
-    public InputService(){
+    public InputService(DiceRollStrategy diceRollStrategy){
         players = new ArrayList<>();
+        this.diceRollStrategy = diceRollStrategy;
     }
 
     public List<Player> getInput(){
@@ -29,7 +34,7 @@ public class  InputService {
             Integer health = new IntegerInput(500).takeInput();
             System.out.println();
 
-            players.add(new Player(name, i, strength, attack, health));
+            players.add(new Player(name, i, strength, attack, health, diceRollStrategy));
         }
         return players;
     }

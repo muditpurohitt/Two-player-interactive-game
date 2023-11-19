@@ -4,10 +4,13 @@ import assignment.magicalArena.model.Game;
 import assignment.magicalArena.model.Player;
 import assignment.magicalArena.model.types.GameState;
 
+import java.util.Scanner;
+
 //
 public class GameStatusUpdatingService {
     private Game game;
-    public GameStatusUpdatingService(Game game){
+
+    public GameStatusUpdatingService(Game game) {
         this.game = game;
     }
     public void update(){

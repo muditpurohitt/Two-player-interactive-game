@@ -1,36 +1,47 @@
 package assignment.magicalArena.Tests;
 
-import assignment.magicalArena.Main;
+import assignment.magicalArena.controller.GameController;
+import assignment.magicalArena.model.Game;
+import assignment.magicalArena.model.Player;
+import assignment.magicalArena.service.DiceRollStrategy.RollRandom;
+import assignment.magicalArena.service.winStrategy.CheckHeathWinningStrategy;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainClassFlowTest {
+public class PrintPlayersTest {
     @Test
-    void testMainGameFlow() {
-        // Redirect System.in to provide user input
-        InputStream originalSystemIn = System.in;
-        System.setIn(new ByteArrayInputStream("Player1\n50\n10\n100\nPlayer2\n40\n12\n120\nq\n".getBytes()));
+    void testPrintPlayers() {
+        GameController gameController = new GameController();
+        List<Player> lst = new ArrayList<>();
+        lst.add(new Player("Player1", 1, 50, 10, 100, new RollRandom()));
+        lst.add(new Player("Player2", 2, 40, 12, 120, new RollRandom()));
+        Game game = Game.getBuilder().setPlayers(lst).setStrategy(new CheckHeathWinningStrategy()).build();
 
         // Redirect System.out to capture output
         TestPrintStream testPrintStream = new TestPrintStream();
         System.setOut(testPrintStream);
 
-        // Run the main method
-        Main.main(new String[]{});
+        // Print players and capture the output
+        gameController.printPlayers(game);
+        String output = testPrintStream.getOutput();
 
-        // Reset System.in and System.out
-        System.setIn(originalSystemIn);
+        // Reset System.out
         System.setOut(System.out);
 
-        // Validate the output
-        String output = testPrintStream.getOutput();
-        assertTrue(output.contains("Exiting the game"));
-        assertTrue(output.contains("won the game"));
+        // Validate the output contains player information
+        assertTrue(output.contains("Player1"));
+        assertTrue(output.contains("Player2"));
+        assertTrue(output.contains("50"));
+        assertTrue(output.contains("40"));
+        assertTrue(output.contains("10"));
+        assertTrue(output.contains("12"));
+        assertTrue(output.contains("100"));
+        assertTrue(output.contains("120"));
     }
 
     private static class TestPrintStream extends PrintStream {

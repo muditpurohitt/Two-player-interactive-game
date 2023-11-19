@@ -4,17 +4,18 @@ import assignment.magicalArena.model.Game;
 import assignment.magicalArena.model.Player;
 import assignment.magicalArena.model.types.GameState;
 import assignment.magicalArena.service.ConsoleInputServices.InputService;
+import assignment.magicalArena.service.DiceRollStrategy.DiceRollStrategy;
 import assignment.magicalArena.service.winStrategy.GameWinningStrategy;
 
 import java.util.List;
 
 public class GameController {
 
-    public List<Player> getInput(){
-        return new InputService().getInput();
+    public List<Player> getInput(DiceRollStrategy diceRollStrategy){
+        return new InputService(diceRollStrategy).getInput();
     }
 
-    public Game startGame(List<Player> players, GameWinningStrategy gameWinningStrategy) throws Exception {
+    public Game startGame(List<Player> players, GameWinningStrategy gameWinningStrategy){
         return Game.getBuilder().setPlayers(players).setStrategy(gameWinningStrategy).build();
     }
     public void printPlayers(Game game){

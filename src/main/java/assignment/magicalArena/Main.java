@@ -4,6 +4,7 @@ package assignment.magicalArena;
 import assignment.magicalArena.controller.GameController;
 import assignment.magicalArena.model.Game;
 import assignment.magicalArena.model.types.GameState;
+import assignment.magicalArena.service.DiceRollStrategy.RollRandom;
 import assignment.magicalArena.service.winStrategy.CheckHeathWinningStrategy;
 
 import java.util.Scanner;
@@ -11,13 +12,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         GameController gameController = new GameController();
-        Game game = null;
+        Game game = gameController.startGame(gameController.getInput(new RollRandom()), new CheckHeathWinningStrategy());
 
-
-        try{game = gameController.startGame(gameController.getInput(), new CheckHeathWinningStrategy());}
-        catch (Exception e){
-            System.out.println("Please enter 2 players");
-        }
         Scanner scn = new Scanner(System.in);
         while(gameController.checkState(game).equals(GameState.IN_PROGRESS)){
             gameController.printPlayers(game);
