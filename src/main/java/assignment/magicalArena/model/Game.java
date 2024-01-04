@@ -61,6 +61,8 @@ public class Game {
         return new Builder();
     }
     public void printPlayers() {new PrintPlayersService(players).print();}
+
+    //makes the move using makemoveservice when prompted by game controller
     public void makeMove(){
         System.out.println("Attacker : " + attacker.getName());
         System.out.println("Defender : " + defender.getName());
@@ -75,7 +77,7 @@ public class Game {
 
 
 
-    //BUILDER
+    //BUILDER - return the game object
     public static class Builder{
         private List<Player> players;
         private GameWinningStrategy gameWinningStrategy;

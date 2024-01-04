@@ -30,5 +30,7 @@ public class Player {
     public void setHealth(Integer value){this.health = value;}
     public Integer getStrength(){return strength;}
     public Integer getAttack(){return attack;}
+
+    //player rolls the dice
     public Integer rollDice() {return new DiceService(this, diceRollStrategy).roll();}
 }

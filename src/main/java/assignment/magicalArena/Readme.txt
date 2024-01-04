@@ -6,13 +6,15 @@ How to run the application-
 
 1. Navigate to Magical Arena -> src -> main -> java -> assignment -> magicalArena
 2. Run the main file.
-3. You will be prompted by the console for the inputs to play
-4. Enjoy the game
+3. You will be prompted by the console for the inputs to play.
+4. You can quit the game after every move by pressing 'q' on the keyboard.
+5. Enjoy the game
 
 ==============================================================================
 Explainiation -
 
 The code has been written keeping in mind the SOLID principles.
+
 
 1.Design pattens used-
    a. Builder Design Pattern

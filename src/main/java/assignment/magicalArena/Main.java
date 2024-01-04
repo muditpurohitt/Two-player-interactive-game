@@ -11,10 +11,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        //creating game controller object and creating the game
         GameController gameController = new GameController();
         Game game = gameController.startGame(gameController.getInput(new RollRandom()), new CheckHeathWinningStrategy());
 
         Scanner scn = new Scanner(System.in);
+        //running the game while checking the game state after each move
         while(gameController.checkState(game).equals(GameState.IN_PROGRESS)){
             gameController.printPlayers(game);
             gameController.makeMove(game);
